@@ -85,6 +85,7 @@ I want to be able to go into a directory and automatically be in a nix developme
     };
   };
 ```
+[example](https://github.com/rmolson/nix-developer-envs/blob/docs/sample-home-manager/home.nix#L73)
 
 run `home-manager switch` to apply this config
 ```sh
