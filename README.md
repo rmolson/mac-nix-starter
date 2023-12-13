@@ -1,4 +1,4 @@
-# Templates to get development envirinoments started using NIX
+# Templates to get development environments started using NIX
 [Nix main site](https://nixos.org/)
 
 [Nix packages](https://search.nixos.org/)
@@ -24,13 +24,13 @@ nix-shell -p git
 
 At this point we can go into the `sample-node18` directory and run the following command, and be in a development environment with nodejs 18
 ```sh
-nixnix develop --extra-experimental-features nix-command --extra-experimental-features  flakes
+nix develop --extra-experimental-features nix-command --extra-experimental-features  flakes
 ```
 
 ## Nix flakes
-We are using nix flakes.  While nix flakes are common to use, they are still considied experemental to nix.  In order to use them, and not have to add options to each command, we are going to add a config file to tell nix it's okay.
+We are using nix flakes.  While nix flakes are common to use, they are still considered experimental to nix.  In order to use them, and not have to add options to each command, we are going to add a config file to tell nix it's okay.
 
-- Create a new directroy and config file
+- Create a new directory and config file
 ```sh
 mkdir -p ~/.config/nix
 touch ~/.config/nix/nix.conf
@@ -46,7 +46,7 @@ nix develop
 ```
 and end up in a nix development shell with nodejs and typescript
 
-I've done all of this running in a nix-shell to provide me `git`.  In the next sessioin, I'm going to setup home manager so I can install git via nix, as well as `direnv` so when I go into the `sample-node18` directory it will put me in a nix dev shell automaticly
+I've done all of this running in a nix-shell to provide me `git`.  In the next section, I'm going to setup home manager so I can install git via nix, as well as `direnv` so when I go into the `sample-node18` directory it will put me in a nix dev shell automatically
 
 ## Home manager
 Home manager documentation: https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone
@@ -65,7 +65,7 @@ nix run home-manager/master -- init --switch
 
 You can now add packages by adding them to the `~/.config/home-manager/home.nix` file and apply/install with the following command.
 
-I want to be able to go into a directory and automaticly be in a nix development shell.  In order to do that, I need some additional packages and config.  I'm going to add the following to the `~/.config/home-manager/home.nix` file
+I want to be able to go into a directory and automatically be in a nix development shell.  In order to do that, I need some additional packages and config.  I'm going to add the following to the `~/.config/home-manager/home.nix` file
 
 > [!WARNING]
 > If you have custom `.bashrc` or `.zshrc` file, copy them somewhere to back them up.  the `bash.enable` and `zsh.enable` directives below will tell home-manager to start managing those files.
@@ -88,7 +88,7 @@ I want to be able to go into a directory and automaticly be in a nix development
 
 run `home-manager switch` to apply this config
 ```sh
-home-manager swtich
+home-manager switch
 ```
 
 Since this is going to update bashrc/zshrc, you will need to open a new shell.
@@ -105,4 +105,4 @@ When using direnv, you have to tell your system it is okay to run what it is the
 direnv allow
 ```
 
-Once you do that, you will be in a nix develop shell.  When you leave the directry the shell will go away, when you come back in the shell will start
+Once you do that, you will be in a nix develop shell.  When you leave the directory the shell will go away, when you come back in the shell will start
