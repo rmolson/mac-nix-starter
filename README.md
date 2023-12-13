@@ -85,3 +85,24 @@ I want to be able to go into a directory and automaticly be in a nix development
     };
   };
 ```
+
+run `home-manager switch` to apply this config
+```sh
+home-manager swtich
+```
+
+Since this is going to update bashrc/zshrc, you will need to open a new shell.
+
+Now if you go into the sample-node18 directory, it will provide an error.
+
+```sh
+direnv: error /Users/me/git/nix-developer-envs/sample-node18/.envrc is blocked. Run `direnv allow` to approve its content
+```
+
+When using direnv, you have to tell your system it is okay to run what it is the .envrc file when you go to this directory.
+
+```sh
+direnv allow
+```
+
+Once you do that, you will be in a nix develop shell.  When you leave the directry the shell will go away, when you come back in the shell will start
