@@ -69,8 +69,8 @@
   };
 
   # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
   programs = {
-    home-manager.enable = true;
     bash.enable = true;
     direnv = {
       enable = true;
@@ -78,6 +78,7 @@
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
+    git.enable = true;
     zsh = {
       enable = true;
     };
