@@ -22,6 +22,8 @@ If you are starting on a new mac, and you don't have git and/or xcode-select ins
 nix-shell -p git
 ```
 
+Now we have everything we need downloaded, but we may still need to either source the new cli tools to our current shell, or restart the shell so we have all the new cli tools available to use.
+
 At this point we can go into the `sample-node18` directory and run the following command, and be in a development environment with nodejs 18
 ```sh
 nix develop --extra-experimental-features nix-command --extra-experimental-features  flakes
@@ -35,7 +37,13 @@ We are using nix flakes.  While nix flakes are common to use, they are still con
 mkdir -p ~/.config/nix
 touch ~/.config/nix/nix.conf
 ```
-open the nix.conf file with your editor and add the following line to it
+open the nix.conf file with your editor 
+```
+vim ~/.config/nix/nix.conf
+OR
+code ~/.config/nix/nix.conf
+```
+and add the following line to it
 ```nix
 experimental-features = nix-command flakes
 ```
@@ -51,24 +59,31 @@ I've done all of this running in a nix-shell to provide me `git`.  In the next s
 ## Home manager
 Home manager documentation: https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone
 
-I'm going it install home-manager using nix flakes. This will do the following
+I'm going it install home-manager using nix flakes. 
+```sh
+nix run home-manager/master -- init --switch
+```
+This will do the following
 - Install home-manager
-- Create a directory `~/.config/home-manager`
+- Create the directory `~/.config/home-manager`
 - add some base nix files
   - flake.nix
   - home.nix
   - flake.lock
 
-```sh
-nix run home-manager/master -- init --switch
-```
+You can now add packages by adding them to the `~/.config/home-manager/home.nix` file and apply/install with the command `home-manager switch`. Let's try that now.
 
-You can now add packages by adding them to the `~/.config/home-manager/home.nix` file and apply/install with the following command.
-
-I want to be able to go into a directory and automatically be in a nix development shell.  In order to do that, I need some additional packages and config.  I'm going to add the following to the `~/.config/home-manager/home.nix` file
+For example, I want to be able to go into a directory and automatically be in a nix development shell.  In order to do that, I need some additional packages and config. I'm going to add the following to the `~/.config/home-manager/home.nix` file
 
 > [!WARNING]
 > If you have custom `.bashrc` or `.zshrc` file, copy them somewhere to back them up.  the `bash.enable` and `zsh.enable` directives below will tell home-manager to start managing those files.
+
+```
+vim ~/.config/home-manager/home.nix
+OR
+code ~/.config/home-manager/home.nix
+```
+and then copy in the following configuration to that file at the bottom, but still inside the base configuration object
 
 ```nix
   programs = {
